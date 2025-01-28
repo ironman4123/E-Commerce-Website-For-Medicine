@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Zoro.to</title>
+<link rel="icon" href="https://icons.iconarchive.com/icons/crountch/one-piece-jolly-roger/256/Zoro-icon.png" type="image/x-icon">
+<!-- Add Bootstrap CSS link -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+	body {
+    background-image: url('https://c4.wallpaperflare.com/wallpaper/114/1008/41/one-piece-monkey-d-luffy-hd-wallpaper-preview.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif; /* Specify your preferred font here */
+}
+
+/* Center the content vertically and horizontally */
+.container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background-color: rgba(240, 240, 240, 0.8); /* Add a semi-transparent white background for better readability */
+        padding: 20px;
+        border-radius: 10px;
+}
+/* Style the form elements */
+form {
+    text-align: center;
+}
+
+h3 {
+    margin-top: 10px;
+}
+</style>
+</head>
+<body class="center-content"> <!-- Apply the center-content class to center the content -->
+    <div class="container">
+        <form action="login.jsp" method="post" name="form">
+            <h3>User name</h3>
+            <input type="text" name="username" value="" placeholder="Enter your email" class="form-control">
+            
+            <h3>Password</h3>
+            <input type="password" name="password" value="" placeholder="Password" class="form-control"><br>
+            
+            <input type="submit" class="btn btn-primary" value="Login">
+        </form>
+    </div>
+
+    <!-- Add Bootstrap JS scripts (jQuery and Popper.js are required dependencies) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
