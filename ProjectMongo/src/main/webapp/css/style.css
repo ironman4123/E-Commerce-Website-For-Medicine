@@ -1,0 +1,118 @@
+/* Reset styles for various elements */
+body, h1, h2, h3, p, ul, li, form, input, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Apply a background image to the body */
+body {
+    background-image: url('https://t4.ftcdn.net/jpg/03/08/24/29/360_F_308242904_BNor0M6K6I19nVW6AVv8Qg9fWtuU9hMB.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+}
+
+/* Center the content vertically and horizontally */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+    background-color: rgba(240, 240, 240, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Style the form elements */
+form {
+    text-align: center;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Style headings */
+h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #213555;
+    margin-bottom: 20px;
+}
+
+h3 {
+    margin-top: 10px;
+}
+
+
+/* Style submit button */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Result Massage */
+.result-message {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Navbar styles (you can adjust these as needed) */
+.navbar {
+    background-color: #F1EFEF;
+}
+
+.navbar-brand img {
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.navbar-nav {
+    margin-left: auto;
+}
+
+.nav-item {
+    margin-left: 10px;
+}
+
+.navbar-username {
+            font-weight: bold;
+		    background-color: #FFFD8C; /* Highlight color, change this to your preferred highlight color */
+		    padding: 2px 5px; /* Adjust padding as needed */
+		    border-radius: 5px; /* Add a border-radius for rounded corners */
+}
+
+/* Additional styles can be added as needed */
+
+/* Style for information labels */
+
+.info-label .col-md-3 {
+    font-weight: bold;
+    text-align: left;
+    color: #7091F5; /* Label text color */
+}
+
+.info-label .col-md-9 {
+    text-align: left;
+    color: #333;
+}
+
+/* Add more specific styling for individual labels if needed */

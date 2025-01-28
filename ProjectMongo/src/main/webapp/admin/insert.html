@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Zoro.to</title>
+    <link rel="icon" href="https://icons.iconarchive.com/icons/crountch/one-piece-jolly-roger/256/Zoro-icon.png" type="image/x-icon">
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../new.html">
+          <img src="https://icons.iconarchive.com/icons/crountch/one-piece-jolly-roger/256/Zoro-icon.png" alt="" class="d-inline-block align-text-top">
+          Zoro.to
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="MA/marks.html">Marks</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="MA/attendance.html">Attendance</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+    <div class="container center-content">
+        <form action="insert.jsp" method="post" name="form">
+            <div class="form-row">
+                <div class="col">
+                    <h3>Enter ID:</h3>
+                    <input type="text" name="ID" value="" placeholder="Enter ID" class="form-control">
+                </div>
+                <div class="col">
+                    <h3>Enter password:</h3>
+                    <input type="password" id="myInput" name="password" value="" placeholder="Enter password" class="form-control">
+                    <input type="checkbox" onclick="myFunction()"> Show Password
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+                    <h3>Enter Name:</h3>
+                    <input type="text" name="Name" value="" placeholder="Enter full name" class="form-control">
+                </div>
+                <div class="col">
+                    <h3>Blood Group:</h3>
+                    <input type="text" name="bloodgrp" value="" placeholder="Blood Group" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+                    <h3>Enter Date Of Birth:</h3>
+                    <input type="date" name="dob" value="" placeholder="" class="form-control">
+                </div>
+                <div class="col">
+                    <h3>Branch:</h3>
+                    <select name="Branch" class="form-control">
+                        <option value="">Select</option>
+                        <option value="Civil Engineering">Civil Engineering</option>
+                        <option value="Computer Engineering">Computer Engineering</option>                
+                        <option value="Information Technology">Information Technology</option>
+                        <option value="Electronic and Telecommunication Engineering">Electronic and Telecommunication Engineering</option>
+                        <option value="Electronic and Computer Engineering">Electronic and Computer Engineering</option>
+                        <option value="Electrical Engineering">Electrical Engineering</option>
+                        <option value="Mechanical Engineering">Mechanical Engineering</option>
+                        <option value="Artificial Intelligence and Data Science">Artificial Intelligence and Data Science</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+                    <h3>Parent Phone Number:</h3>
+                    <input type="tel" name="par_number" value="" placeholder="Enter Number" class="form-control">
+                </div>
+                <div class="col">
+                    <h3>Self Phone Number:</h3>
+                    <input type="tel" name="self_number" value="" placeholder="Enter Number" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+                    <h3>Year:</h3>
+                    <select name="Year" class="form-control">
+                        <option value="">Select</option>
+                        <option value="FE">First Year</option>
+                        <option value="SE">Second Year</option>
+                        <option value="TE">Third Year</option>
+                        <option value="BE">Fourth Year</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <h3>Email ID</h3>
+                    <input type="email" name="email" value="" placeholder="Enter Email" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+                    <h3>Address:</h3>
+                    <textarea name="Address" rows="4" cols="50"></textarea>
+                </div>
+                <div class="col">
+                    <h3>City:</h3>
+                    <input type="text" name="city" value="" placeholder="Enter City" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col">
+                    <h3>State:</h3>
+                    <input type="text" name="state" value="" placeholder="Enter State" class="form-control">
+                </div>
+                <div class="col">
+                    <h3>Pincode:</h3>
+                    <input type="text" name="pincode" value="" placeholder="Enter pincode" class="form-control">
+                </div>
+            </div>
+
+            <input type="submit" class="btn btn-primary" value="Submit">
+        </form>
+    </div>
+
+    <!-- Add Bootstrap JS scripts (jQuery and Popper.js are required dependencies) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myInput");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
+</body>
+</html>

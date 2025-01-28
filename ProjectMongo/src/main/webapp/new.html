@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Zoro.to</title>
+<link rel="icon" href="https://icons.iconarchive.com/icons/crountch/one-piece-jolly-roger/256/Zoro-icon.png" type="image/x-icon">
+
+<!-- Add Bootstrap CSS link -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+    /* Custom styles for centering content and form */
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-image: url('https://t4.ftcdn.net/jpg/03/08/24/29/360_F_308242904_BNor0M6K6I19nVW6AVv8Qg9fWtuU9hMB.jpg'); /* Add your background image URL here */
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    form {
+        margin-left: 38%;
+        width: 50%; /* Set the width to 50% of the viewport width */
+        max-width: 400px; /* Add a maximum width for larger screens */
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.8); /* Add a semi-transparent white background for better readability */
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    /* Additional styling for the form inputs */
+    .form-control {
+        margin-bottom: 10px;
+    }
+</style>
+
+</head>
+<body>
+    <div class="container">
+        <form action="login.jsp" method="post" name="form">
+            <h3>User name</h3>
+            <input type="text" name="ID" value="" placeholder="Enter ID" class="form-control">
+            
+            <h3>Password</h3>
+            <input type="password" id="myInput" name="password" value="" placeholder="Password" class="form-control">
+            <input type="checkbox" onclick="myFunction()"> Show Password <br><br>
+            
+            <input type="submit" class="btn btn-primary" value="Login">
+
+        </form>
+    </div>
+
+    <!-- Add Bootstrap JS scripts (jQuery and Popper.js are required dependencies) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myInput");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
+</body>
+</html>

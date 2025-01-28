@@ -1,0 +1,67 @@
+/* Style the search bar container */
+.search-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+/* Style the h3 elements inside the search bar */
+.search-bar h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Style the input elements inside the search bar */
+input[type="text"] {
+	align-items: center;
+    width: 50%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+    color: #333;
+}
+
+.position{
+	margin: 10px 50%;
+}
+/* Style the select elements inside the search bar */
+.search-bar select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+    color: #333;
+}
+
+/* Style the subject input fields */
+#subjectFields {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#subjectFields .col {
+    flex-basis: calc(33.33% - 10px); /* Adjust the width as needed */
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+
+/* Style the h3 tags */
+h3 {
+    margin: 0; /* Remove default margin */
+    font-weight: bold;
+    color: #213555;
+}

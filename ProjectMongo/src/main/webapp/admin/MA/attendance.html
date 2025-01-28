@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Zoro.to</title>
+    <link rel="icon" href="https://icons.iconarchive.com/icons/crountch/one-piece-jolly-roger/256/Zoro-icon.png"
+        type="image/x-icon">
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Include the custom CSS for the form -->
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../../login.html">
+                <img src="https://icons.iconarchive.com/icons/crountch/one-piece-jolly-roger/256/Zoro-icon.png"
+                    alt="" class="d-inline-block align-text-top">
+                Zoro.to
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="marks.html">Marks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="attendance.html">Attendance</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container center-content">
+        <form action="attendance.jsp" method="post" name="form">
+            <div class="search-bar">
+				
+				<h3>Enter ID:</h3>
+                    <input type="text" name="ID" value="" placeholder="Enter ID" class="form-control">
+				
+                <h3>Year:</h3>
+                <select name="Year" class="form-control" onchange="updateSubjects()">
+                    <option value="">Select</option>
+                    <option value="FE">First Year</option>
+                    <option value="SE">Second Year</option>
+                    <option value="TE">Third Year</option>
+                    <option value="BE">Fourth Year</option>
+                </select>
+
+                <h3>Branch:</h3>
+                <select name="Branch" class="form-control" onchange="updateSubjects()">
+                    <option value="">Select</option>
+                    <option value="Civil Engineering">Civil Engineering</option>
+                    <option value="Computer Engineering">Computer Engineering</option>
+                    <option value="Information Technology">Information Technology</option>
+                    <option value="Electronic and Telecommunication Engineering">Electronic and Telecommunication
+                        Engineering</option>
+                    <option value="Electronic and Computer Engineering">Electronic and Computer Engineering</option>
+                    <option value="Electrical Engineering">Electrical Engineering</option>
+                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                    <option value="Artificial Intelligence and Data Science">Artificial Intelligence and Data
+                        Science</option>
+                </select>
+            </div>
+
+            <div class="form-row" id="subjectFields" style="display: none;">
+                <!-- Subjects will be dynamically inserted here based on selection -->
+            </div>
+
+            <input type="submit" class="btn btn-primary" value="Submit">
+        </form>
+    </div>
+
+    <!-- Add Bootstrap JS scripts (jQuery and Popper.js are required dependencies) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function updateSubjects() {
+            var yearSelect = document.getElementsByName("Year")[0];
+            var branchSelect = document.getElementsByName("Branch")[0];
+            var subjectFields = document.getElementById("subjectFields");
+
+            // Check if both Year and Branch are selected
+            if (yearSelect.value && branchSelect.value) {
+                // Define subjects based on the selected Year and Branch
+                var subjects = [];
+                if (yearSelect.value === "BE" && branchSelect.value === "Computer Engineering") {
+                    subjects = ["DAA", "ML", "BLT","CSDF","STQA"];
+                }
+                // Add more conditions for other combinations
+
+                // Create input fields for the subjects
+                var subjectInputs = subjects.map(function (subject) {
+                    return '<div class="col"><h3>' + subject + ' Attendance:</h3><input class="position" type="text" name="' + subject + '" value="" placeholder="Enter ' + subject + ' Attendance" class="form-control"></div>';
+                });
+
+                // Insert the subject input fields into the form
+                subjectFields.innerHTML = subjectInputs.join('');
+                subjectFields.style.display = 'block';
+            } else {
+                // If Year or Branch is not selected, hide the subject fields
+                subjectFields.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>
