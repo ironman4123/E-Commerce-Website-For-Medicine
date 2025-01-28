@@ -1,0 +1,218 @@
+
+*********************************
+Enter password: ***********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.30 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| avcoe              |
+| employee           |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| student_manage     |
+| sys                |
+| world              |
++--------------------+
+9 rows in set (0.12 sec)
+
+mysql> creat student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'creat student' at line 1
+mysql> create student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'student' at line 1
+mysql> create database student;
+Query OK, 1 row affected (0.41 sec)
+
+mysql> use student;
+Database changed
+mysql> create table student_info(Rollno int, Name varchar(34), Marks int, primary key(Rollno));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc student_info;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| Rollno | int         | NO   | PRI | NULL    |       |
+| Name   | varchar(34) | YES  |     | NULL    |       |
+| Marks  | int         | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> insert into student_info values(1,'Samrat',54);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into student_info values(2,'Anish',55);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student_info values(3,'Shruti',53);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student_info values(4,'Sakshi',55);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student_info values(4,Siddhu'',52);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''',52)' at line 1
+mysql> insert into student_info values(4,'Siddhu',52);
+ERROR 1062 (23000): Duplicate entry '4' for key 'student_info.PRIMARY'
+mysql> insert into student_info values(5,'Siddhu',52);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from student_info;
++--------+--------+-------+
+| Rollno | Name   | Marks |
++--------+--------+-------+
+|      1 | Samrat |    54 |
+|      2 | Anish  |    55 |
+|      3 | Shruti |    53 |
+|      4 | Sakshi |    55 |
+|      5 | Siddhu |    52 |
++--------+--------+-------+
+5 rows in set (0.00 sec)
+
+mysql> create table account_info as select Rollno,name from stdent_info;
+ERROR 1146 (42S02): Table 'student.stdent_info' doesn't exist
+mysql> create table account_info as select Rollno,name from student_info;
+Query OK, 5 rows affected (0.03 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from account_info;
++--------+--------+
+| Rollno | name   |
++--------+--------+
+|      1 | Samrat |
+|      2 | Anish  |
+|      3 | Shruti |
+|      4 | Sakshi |
+|      5 | Siddhu |
++--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> alter table account_info add(fees int);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from account_info;
++--------+--------+------+
+| Rollno | name   | fees |
++--------+--------+------+
+|      1 | Samrat | NULL |
+|      2 | Anish  | NULL |
+|      3 | Shruti | NULL |
+|      4 | Sakshi | NULL |
+|      5 | Siddhu | NULL |
++--------+--------+------+
+5 rows in set (0.00 sec)
+
+mysql> update account_info set fees=20000 where Rollno=1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from account_info;
++--------+--------+-------+
+| Rollno | name   | fees  |
++--------+--------+-------+
+|      1 | Samrat | 20000 |
+|      2 | Anish  |  NULL |
+|      3 | Shruti |  NULL |
+|      4 | Sakshi |  NULL |
+|      5 | Siddhu |  NULL |
++--------+--------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update account_info set fees=30000 where Rollno=2;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update account_info set fees=40000 where Rollno=3;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update account_info set fees=50000 where Rollno=4;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update account_info set fees=60000 where Rollno=45;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from account_info;
++--------+--------+-------+
+| Rollno | name   | fees  |
++--------+--------+-------+
+|      1 | Samrat | 20000 |
+|      2 | Anish  | 30000 |
+|      3 | Shruti | 40000 |
+|      4 | Sakshi | 50000 |
+|      5 | Siddhu |  NULL |
++--------+--------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update account_info set fees=60000 where Rollno=5;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from account_info;
++--------+--------+-------+
+| Rollno | name   | fees  |
++--------+--------+-------+
+|      1 | Samrat | 20000 |
+|      2 | Anish  | 30000 |
+|      3 | Shruti | 40000 |
+|      4 | Sakshi | 50000 |
+|      5 | Siddhu | 60000 |
++--------+--------+-------+
+5 rows in set (0.00 sec)
+
+mysql> delete from student where Name='Siddhu';
+ERROR 1146 (42S02): Table 'student.student' doesn't exist
+mysql> delete from account_info where Name='Siddhu';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select count(*) from student;
+ERROR 1146 (42S02): Table 'student.student' doesn't exist
+mysql> select count(*) from student_info;
++----------+
+| count(*) |
++----------+
+|        5 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select max(marks) from student_info;
++------------+
+| max(marks) |
++------------+
+|         55 |
++------------+
+1 row in set (0.01 sec)
+
+mysql> select avg(marks) from student_info;
++------------+
+| avg(marks) |
++------------+
+|    53.8000 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(marks) from student_info;
++------------+
+| min(marks) |
++------------+
+|         52 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> 

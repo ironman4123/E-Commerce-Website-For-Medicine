@@ -1,0 +1,45 @@
+
+*********************************     
+                                                                 Practical No :4
+Unnamed PL/SQLcode block: Use of Control structure and Exception handling is mandatory.
+Suggested Problem statement:
+Consider Tables:
+1. Borrower(Roll_no, Name, Date of Issue,Name of Book, Status)
+2. Fine(Roll_no, Date, Amt)
+• Accept Roll_no and Name of Book from user.
+• Check the number of days (from date of issue).
+• If days are between 15 to 30 then fine amount will be Rs 5per day. 
+• If no. of days>30, per day fine will be Rs 50 per day and for days less than 30, Rs. 5 per day.
+• After submitting the book, status will change from I to R.
+• If condition of fine is true, then details will be stored into fine table.
+• Also handles the exception by named exception handler or user define exception handler
+
+Queries:
+
+create table Account_status(rollno int, name varchar(20), DOI DATE, NOB varchar(20), status varchar(20));
+insert into Account_status values(1,'Samrat',to_date('20220523','yyyymmdd'),'CPP','I');
+insert into Account_status values(2,'shruti',to_date('20210413','yyyymmdd'),'CN','R');
+insert into Account_status values(3,'Siddhu',to_date('20220822','yyyymmdd'),'Damdhere os','I');
+insert into Account_status values(4,'Om',to_date('20210618','yyyymmdd'),'Complete JAVA','R');
+create table fine(rollno int, DOI DATE, amt float);
+
+create or replace procedure book(r number)
+as
+c number;
+BEGIN
+select to_number(trunc(sysdate-doi)) into c from Account_status where rollno=r ;
+if c>=15 AND c<=30 then
+c:=c-15;
+insert into fine values(r,sysdate,c*5);
+update Account_status set status='R' where rollno=r;
+elsif c>30 then
+c:=c-30;
+insert into fine values(r,sysdate,c*50+75);
+update Account_status set status='R' where rollno=r;
+end if;
+END;
+/
+
+set serveroutput on;
+execute book(2);
+select * from fine;

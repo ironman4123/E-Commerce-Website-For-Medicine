@@ -1,0 +1,4 @@
+1		sam	CS	99
+2		luffy	cs	88
+3		zoro	it	66
+4		sanji	it	77

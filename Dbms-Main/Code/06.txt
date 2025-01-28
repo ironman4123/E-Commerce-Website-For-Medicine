@@ -1,0 +1,53 @@
+
+*********************************
+                                                               Practical No : 6
+                                                               
+Cursors:(All types: Implicit, Explicit, Cursor FOR Loop, Parameterized Cursor)
+Write a PL/SQL block of code using parameterized Cursor that will merge the data available in the newly created table N_Roll Call with the data available in the table O_RollCall. If the data in the first table already exist in the second table then that data should be skipped.
+Note: Instructor will frame the problem statement for writing PL/SQL block using all types of Cursors in line with above statement.                                                               
+Query:
+create table O_RollCall(rollno int, name varchar(100));
+insert into O_rollcall values(1,'Samrat');
+insert into O_rollcall values(5,'Anish');
+
+create table n_rollcall(rollno int, name varchar(100));
+insert into n_rollcall values(1,'Samrat');
+insert into n_rollcall values(2,'Siddhu');
+insert into n_rollcall values(3,'Anish');
+
+Cursor Program:
+
+DECLARE
+rn o_rollcall.rollno%Type;
+nm o_rollcall.name%Type;
+cursor c_rollno is select * from o_rollcall minus select * from n_rollcall;
+BEGIN
+open c_rollno;
+loop
+fetch c_rollno into rn,nm;
+exit when c_rollno %notfound;
+insert into n_rollcall values(rn,nm);
+end loop;
+close c_rollno;
+END;
+/
+
+old table:
+ROLLNO	NAME
+1	Gaurav
+5	BH
+
+New Table:
+
+ROLLNO	NAME
+1	Gaurav
+2	Pratik
+3	Anish
+
+After process:
+ROLLNO	NAME
+1	Gaurav
+2	Pratik
+3	Anish
+5	BH
+

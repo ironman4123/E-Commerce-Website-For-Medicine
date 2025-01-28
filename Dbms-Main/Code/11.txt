@@ -1,0 +1,75 @@
+
+*********************************                                                               
+                                                                 Practical No:11
+
+
+MongoDB – Map-reduces operations: Implement Map reduces operation with suitable example using MongoDB.
+
+> use demo
+switched to db demo
+> db.orders.insert({cust_id:"A123",amount: 500, status:'A'})
+WriteResult({ "nInserted" : 1 })
+>
+> db.orders.insert({cust_id:"A123",amount: 250, status:'A'})
+WriteResult({ "nInserted" : 1 })
+>
+> db.orders.insert({cust_id:"A121",amount: 200, status:'A'})
+WriteResult({ "nInserted" : 1 })
+>
+> db.orders.insert({cust_id:"B234",amount: 200, status:'A'})
+WriteResult({ "nInserted" : 1 })
+>
+> db.orders.insert({cust_id:"B234",amount: 234, status:'B'})
+WriteResult({ "nInserted" : 1 })
+>
+> db.orders.insert({cust_id:"A121",amount: 400, status:'D'})
+WriteResult({ "nInserted" : 1 })
+>
+> db.orders.insert({cust_id:"A234",amount: 400, status:'A'})
+WriteResult({ "nInserted" : 1 })
+>
+> db.orders.insert({cust_id:"A234",amount: 400, status:'B'})
+WriteResult({ "nInserted" : 1 })
+>
+> db.orders.insert({cust_id:"A234",amount: 400, status:'B'})
+WriteResult({ "nInserted" : 1 })
+
+
+
+>  var mapFunction1 = function() { emit(this.cust_id, this.amount); };
+
+
+> var reduceFunction1 = function(keyCustId, valuesamount) { return Array.sum(valuesamount); };
+
+
+> db.orders.mapReduce(
+mapFunction1,
+reduceFunction1,
+{ out: "map_reduce_example" }
+)
+{
+        "result" : "map_reduce_example",
+        "timeMillis" : 317,
+        "counts" : {
+                "input" : 9,
+                "emit" : 9,
+                "reduce" : 4,
+                "output" : 4
+        },
+        "ok" : 1,
+}
+> db.map_reduce_example.find()
+
+
+{ "_id" : "A121", "value" : 600 }
+{ "_id" : "A123", "value" : 750 }
+{ "_id" : "A234", "value" : 1200 }
+{ "_id" : "B234", "value" : 434 }
+
+
+> db.orders.distinct("cust_id")
+[ "A123", "A121", "B234", "A234" ]
+
+
+
+

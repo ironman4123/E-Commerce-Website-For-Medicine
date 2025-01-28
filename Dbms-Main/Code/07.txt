@@ -1,0 +1,37 @@
+
+*********************************
+                                                                        Practical NO: 7
+Database Trigger (All Types: Row level and Statement level triggers, Before and After Triggers).
+Write a database trigger on Library table. The System should keep track of the records that are being updated or deleted. The old value of updated or deleted records should be added in Library_Audit table.
+Note: Instructor will Frame the problem statement for writing PL/SQLblock for all types of Triggers in line with above Statement.
+
+Query:
+create table lib_data(rollno int,name varchar(20),status varchar(20));
+
+insert into lib_data values(1,'Samrat','R');
+insert into lib_data values(2,'Anish','I');
+insert into lib_data values(3,'Siddhu','I');
+insert into lib_data values(4,'Vaibhav','R');
+
+create table liba(rollno int,name varchar(20),status varchar(20));
+
+create or replace trigger library
+before delete or update on lib_data
+REFERENCING old as o new as n
+for each row
+begin
+insert into liba values(:o.rollno, :o.name, :o.status);
+end;
+
+delete from lib_data where rollno=1; 
+delete from lib_data where rollno=2;
+update lib_data set rollno=1 where rollno=3;
+
+After delete Query:
+
+liba table:
+
+ROLLNO	NAME	STATUS
+1	Samrat	R
+2	Anish	I
+3	Siddhu	I

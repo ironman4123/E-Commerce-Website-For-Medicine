@@ -1,0 +1,284 @@
+***************
+                                                            Practical No :9
+
+       Title: Design and Develop MongoDB Queries using CRUD operations.(UseCRUDoperations, SAVE method, logical operators etc.). 
+
+> use mydb
+switched to db mydb
+> show dbs
+admin     0.000GB
+avcoe     0.000GB
+config    0.000GB
+local     0.000GB
+mongodb1  0.000GB
+> dbmydb
+2022-11-10T09:31:37.948+0530 E  QUERY    [js] uncaught exception: ReferenceError: dbmydb is not defined :
+@(shell):1:1
+> db.movie.insert({"name":"Tutorials point"})
+WriteResult({ "nInserted" : 1 })
+> dbmydb
+2022-11-10T09:33:05.710+0530 E  QUERY    [js] uncaught exception: ReferenceError: dbmydb is not defined :
+@(shell):1:1
+> show dbs
+admin     0.000GB
+avcoe     0.000GB
+config    0.000GB
+local     0.000GB
+mongodb1  0.000GB
+mydb      0.000GB
+> db.dropDatabase();
+{ "dropped" : "mydb", "ok" : 1 }
+> show dbs
+admin     0.000GB
+avcoe     0.000GB
+config    0.000GB
+local     0.000GB
+mongodb1  0.000GB
+> use test
+switched to db test
+> db.createCollection("Mycollection")
+{ "ok" : 1 }
+> db.createCollection("Movie")
+{ "ok" : 1 }
+> show collections
+Movie
+Mycollection
+> db.Movie.drop;
+function(options = {}) {
+    const cmdObj = Object.assign({drop: this.getName()}, options);
+    ret = this._db.runCommand(cmdObj);
+    if (!ret.ok) {
+        if (ret.errmsg == "ns not found")
+            return false;
+        throw _getErrorWithCode(ret, "drop failed: " + tojson(ret));
+    }
+    return true;
+}
+> db.Movie.drop();
+true
+> show collections
+Mycollection
+> use mongodb1;
+switched to db mongodb1
+> db.create collection('user');
+2022-11-05T22:05:05.510+0530 E  QUERY    [js] uncaught exception: SyntaxError: unexpected token: identifier :
+@(shell):1:10
+> db.create Collection('user');
+2022-11-05T22:05:51.998+0530 E  QUERY    [js] uncaught exception: SyntaxError: unexpected token: identifier :
+@(shell):1:10
+> db.createCollection('user');
+{ "ok" : 1 }
+> db.user.insert({"User_id":101,"Age":50,"Status":'A'});
+WriteResult({ "nInserted" : 1 })
+> db.user.find();
+{ "_id" : ObjectId("6366923ba8525a0e8d8f1739"), "User_id" : 101, "Age" : 50, "Status" : "A" }
+> db.user.insert({"User_id":102,"Age":40,"Status":'A'});
+WriteResult({ "nInserted" : 1 })
+> db.user.insert({"User_id":103,"Age":50,"Status":'B'});
+WriteResult({ "nInserted" : 1 })
+> db.user.insert({"User_id":104,"Age":50,"Status":'A'});
+WriteResult({ "nInserted" : 1 })
+> db.user.find();
+{ "_id" : ObjectId("6366923ba8525a0e8d8f1739"), "User_id" : 101, "Age" : 50, "Status" : "A" }
+{ "_id" : ObjectId("6366928ca8525a0e8d8f173a"), "User_id" : 102, "Age" : 40, "Status" : "A" }
+{ "_id" : ObjectId("6366929ea8525a0e8d8f173b"), "User_id" : 103, "Age" : 50, "Status" : "B" }
+{ "_id" : ObjectId("636692aba8525a0e8d8f173c"), "User_id" : 104, "Age" : 50, "Status" : "A" }
+> db.user.find().pretty();
+{
+        "_id" : ObjectId("6366923ba8525a0e8d8f1739"),
+        "User_id" : 101,
+        "Age" : 50,
+        "Status" : "A"
+}
+{
+        "_id" : ObjectId("6366928ca8525a0e8d8f173a"),
+        "User_id" : 102,
+        "Age" : 40,
+        "Status" : "A"
+}
+{
+        "_id" : ObjectId("6366929ea8525a0e8d8f173b"),
+        "User_id" : 103,
+        "Age" : 50,
+        "Status" : "B"
+}
+{
+        "_id" : ObjectId("636692aba8525a0e8d8f173c"),
+        "User_id" : 104,
+        "Age" : 50,
+        "Status" : "A"
+}
+> db.user.find({Query:{Age:50}});
+> db.user.find({Query:{Status:"A"}});
+> db.user.find({Status:"A"});
+{ "_id" : ObjectId("6366923ba8525a0e8d8f1739"), "User_id" : 101, "Age" : 50, "Status" : "A" }
+{ "_id" : ObjectId("6366928ca8525a0e8d8f173a"), "User_id" : 102, "Age" : 40, "Status" : "A" }
+{ "_id" : ObjectId("636692aba8525a0e8d8f173c"), "User_id" : 104, "Age" : 50, "Status" : "A" }
+> db.user.find({Status:"A"} $or {Age:50});
+2022-11-05T22:20:54.899+0530 E  QUERY    [js] uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):1:26
+> db.user.find(({Status:"A"} $or {Age:50}));
+2022-11-05T22:21:24.896+0530 E  QUERY    [js] uncaught exception: SyntaxError: missing ) in parenthetical :
+@(shell):1:27
+> db.user.find($or:[{Status:"A"}, {Age:50}]);
+2022-11-05T22:23:08.666+0530 E  QUERY    [js] uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):1:16
+> db.user.find({$or:[{Status:'A'},{Age:50}]});
+{ "_id" : ObjectId("6366923ba8525a0e8d8f1739"), "User_id" : 101, "Age" : 50, "Status" : "A" }
+{ "_id" : ObjectId("6366928ca8525a0e8d8f173a"), "User_id" : 102, "Age" : 40, "Status" : "A" }
+{ "_id" : ObjectId("6366929ea8525a0e8d8f173b"), "User_id" : 103, "Age" : 50, "Status" : "B" }
+{ "_id" : ObjectId("636692aba8525a0e8d8f173c"), "User_id" : 104, "Age" : 50, "Status" : "A" }
+> db.user.update({'Age':Age},{$set:{'Age':Age+3}})
+2022-11-05T22:32:10.324+0530 E  QUERY    [js] uncaught exception: ReferenceError: Age is not defined :
+@(shell):1:17
+> db.user.update({'Age':'Age'},{$set:{'Age':'Age'+3}})
+WriteResult({ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 })
+> db.user.find({$or:[{Status:'A'},{Age:50}]});
+{ "_id" : ObjectId("6366923ba8525a0e8d8f1739"), "User_id" : 101, "Age" : 50, "Status" : "A" }
+{ "_id" : ObjectId("6366928ca8525a0e8d8f173a"), "User_id" : 102, "Age" : 40, "Status" : "A" }
+{ "_id" : ObjectId("6366929ea8525a0e8d8f173b"), "User_id" : 103, "Age" : 50, "Status" : "B" }
+{ "_id" : ObjectId("636692aba8525a0e8d8f173c"), "User_id" : 104, "Age" : 50, "Status" : "A" }
+> db.user.update({'Age':50},{$set:{'Age':'Age'+3}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.user.find({$or:[{Status:'A'},{Age:50}]});
+{ "_id" : ObjectId("6366923ba8525a0e8d8f1739"), "User_id" : 101, "Age" : "Age3", "Status" : "A" }
+{ "_id" : ObjectId("6366928ca8525a0e8d8f173a"), "User_id" : 102, "Age" : 40, "Status" : "A" }
+{ "_id" : ObjectId("6366929ea8525a0e8d8f173b"), "User_id" : 103, "Age" : 50, "Status" : "B" }
+{ "_id" : ObjectId("636692aba8525a0e8d8f173c"), "User_id" : 104, "Age" : 50, "Status" : "A" }
+> db.user.updateMany({Status:"A"},{$inc:{Age:3}});
+2022-11-05T22:40:24.442+0530 E  QUERY    [js] WriteError({
+        "index" : 0,
+        "code" : 14,
+        "errmsg" : "Cannot apply $inc to a value of non-numeric type. {_id: ObjectId('6366923ba8525a0e8d8f1739')} has the field 'Age' of non-numeric type string",
+        "op" : {
+                "q" : {
+                        "Status" : "A"
+                },
+                "u" : {
+                        "$inc" : {
+                                "Age" : 3
+                        }
+                },
+                "multi" : true,
+                "upsert" : false
+        }
+}) :
+WriteError({
+        "index" : 0,
+        "code" : 14,
+        "errmsg" : "Cannot apply $inc to a value of non-numeric type. {_id: ObjectId('6366923ba8525a0e8d8f1739')} has the field 'Age' of non-numeric type string",
+        "op" : {
+                "q" : {
+                        "Status" : "A"
+                },
+                "u" : {
+                        "$inc" : {
+                                "Age" : 3
+                        }
+                },
+                "multi" : true,
+                "upsert" : false
+        }
+})
+WriteError@src/mongo/shell/bulk_api.js:458:48
+mergeBatchResults@src/mongo/shell/bulk_api.js:855:49
+executeBatch@src/mongo/shell/bulk_api.js:919:13
+Bulk/this.execute@src/mongo/shell/bulk_api.js:1163:21
+DBCollection.prototype.updateMany@src/mongo/shell/crud_api.js:690:17
+@(shell):1:1
+> db.user.update({'Age':50},{$set:{'Age':50}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 0 })
+> db.user.find({$or:[{Status:'A'},{Age:50}]});
+{ "_id" : ObjectId("6366923ba8525a0e8d8f1739"), "User_id" : 101, "Age" : "Age3", "Status" : "A" }
+{ "_id" : ObjectId("6366928ca8525a0e8d8f173a"), "User_id" : 102, "Age" : 40, "Status" : "A" }
+{ "_id" : ObjectId("6366929ea8525a0e8d8f173b"), "User_id" : 103, "Age" : 50, "Status" : "B" }
+{ "_id" : ObjectId("636692aba8525a0e8d8f173c"), "User_id" : 104, "Age" : 50, "Status" : "A" }
+> db.user.update({'Age':Age3},{$set:{'Age':50}})
+2022-11-05T22:42:46.408+0530 E  QUERY    [js] uncaught exception: ReferenceError: Age3 is not defined :
+@(shell):1:17
+> db.user.update({'Age':"Age3"},{$set:{'Age':50}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.user.find({$or:[{Status:'A'},{Age:50}]});
+{ "_id" : ObjectId("6366923ba8525a0e8d8f1739"), "User_id" : 101, "Age" : 50, "Status" : "A" }
+{ "_id" : ObjectId("6366928ca8525a0e8d8f173a"), "User_id" : 102, "Age" : 40, "Status" : "A" }
+{ "_id" : ObjectId("6366929ea8525a0e8d8f173b"), "User_id" : 103, "Age" : 50, "Status" : "B" }
+{ "_id" : ObjectId("636692aba8525a0e8d8f173c"), "User_id" : 104, "Age" : 50, "Status" : "A" }
+> db.user.updateMany({Status:"A"},{$inc:{Age:3}});
+{ "acknowledged" : true, "matchedCount" : 3, "modifiedCount" : 3 }
+> db.user.find({$or:[{Status:'A'},{Age:50}]});
+{ "_id" : ObjectId("6366923ba8525a0e8d8f1739"), "User_id" : 101, "Age" : 53, "Status" : "A" }
+{ "_id" : ObjectId("6366928ca8525a0e8d8f173a"), "User_id" : 102, "Age" : 43, "Status" : "A" }
+{ "_id" : ObjectId("6366929ea8525a0e8d8f173b"), "User_id" : 103, "Age" : 50, "Status" : "B" }
+{ "_id" : ObjectId("636692aba8525a0e8d8f173c"), "User_id" : 104, "Age" : 53, "Status" : "A" }
+> db.user.deleteMany({Status:"A"});
+{ "acknowledged" : true, "deletedCount" : 3 }
+> db.user.find();
+{ "_id" : ObjectId("6366929ea8525a0e8d8f173b"), "User_id" : 103, "Age" : 50, "Status" : "B" }
+> ^C
+bye
+                                                                                                                                                             
+┌──(kali㉿kali)-[~]
+└─$ 
+
+$$$$$4:
+> use mongodb1;
+switched to db mongodb1
+> db.user.find();
+{ "_id" : ObjectId("6366929ea8525a0e8d8f173b"), "User_id" : 103, "Age" : 50, "Status" : "B" }
+{ "_id" : ObjectId("63669c8eda3c91a5e8851bb8"), "User_id" : 104, "Age" : 50, "Status" : "A" }
+{ "_id" : ObjectId("63669d65da3c91a5e8851bb9"), "Name" : "Abhang Sir", "d_no" : 1, "Experience" : 15, "Salary" : 50000, "Date_of_Joining" : "1-1-2007" }
+> db.user.insert({"Name":"Abhang Sir","d_no":1,"Experience":15,"Salary":50000,"Date_of_Joining":"1-1-2007"});
+WriteResult({ "nInserted" : 1 })
+> db.Teachers.insert({"Name":"Abhang Sir","d_no":1,"Experience":15,"Salary":50000,"Date_of_Joining":"1-1-2007"});
+WriteResult({ "nInserted" : 1 })
+> db.Teachers.find();
+{ "_id" : ObjectId("63669e4b473291467fbb239b"), "Name" : "Abhang Sir", "d_no" : 1, "Experience" : 15, "Salary" : 50000, "Date_of_Joining" : "1-1-2007" }
+> db.Teachers.insert({"Name":"Thanekar Sir","d_no":2,"Experience":25,"Salary":10000,"Date_of_Joining":"1-1-2005"});
+WriteResult({ "nInserted" : 1 })
+> db.Teachers.insert({"Name":"Kavita mada","d_no":2,"Experience":35,"Salary":20000,"Date_of_Joining":"1-1-2009"});
+WriteResult({ "nInserted" : 1 })
+> db.Teachers.find();
+{ "_id" : ObjectId("63669e4b473291467fbb239b"), "Name" : "Abhang Sir", "d_no" : 1, "Experience" : 15, "Salary" : 50000, "Date_of_Joining" : "1-1-2007" }
+{ "_id" : ObjectId("63669e87473291467fbb239c"), "Name" : "Thanekar Sir", "d_no" : 2, "Experience" : 25, "Salary" : 10000, "Date_of_Joining" : "1-1-2005" }
+{ "_id" : ObjectId("63669eac473291467fbb239d"), "Name" : "Kavita mada", "d_no" : 2, "Experience" : 35, "Salary" : 20000, "Date_of_Joining" : "1-1-2009" }
+> db.Teachers.find({$and:[{d_no:2},{Salary:{$gt:10000}}]});
+{ "_id" : ObjectId("63669eac473291467fbb239d"), "Name" : "Kavita mada", "d_no" : 2, "Experience" : 35, "Salary" : 20000, "Date_of_Joining" : "1-1-2009" }
+> db.createCollection('Department');
+{ "ok" : 1 }
+> db.Teachers.insert({"DName":"Computer","d_no":1});
+WriteResult({ "nInserted" : 1 })
+> db.Department.insert({"DName":"Computer","d_no":1});
+WriteResult({ "nInserted" : 1 })
+> db.Department.find();
+{ "_id" : ObjectId("6366a0a3473291467fbb239f"), "DName" : "Computer", "d_no" : 1 }
+> db.Department.insert({"DName":"Mechanical","d_no":2});
+WriteResult({ "nInserted" : 1 })
+> db.Department.insert({"DName":"E&TC","d_no":3});
+WriteResult({ "nInserted" : 1 })
+> db.Department.find();
+{ "_id" : ObjectId("6366a0a3473291467fbb239f"), "DName" : "Computer", "d_no" : 1 }
+{ "_id" : ObjectId("6366a0d1473291467fbb23a0"), "DName" : "Mechanical", "d_no" : 2 }
+{ "_id" : ObjectId("6366a0e2473291467fbb23a1"), "DName" : "E&TC", "d_no" : 3 }
+> db.createCollection('Students');
+{ "ok" : 1 }
+> db.Teachers.insert({"Name":"Kavita mada","d_no":2,"Experience":35,"Salary":20000,"Dzsh: suspended (signal)  mongo
+                                                                                                                                                             
+> use mongodb1
+switched to db mongodb1
+> db.Students.insert({"Sname":"Gaurav","ROll":1,"Class":B});
+2022-11-05T23:16:40.148+0530 E  QUERY    [js] uncaught exception: ReferenceError: B is not defined :
+@(shell):1:47
+> db.Students.insert({"Sname":"Gaurav","ROll":1,"Class":"B"});
+WriteResult({ "nInserted" : 1 })
+> db.Students.insert({"Sname":"Pratik","ROll":88,"Class":"A"});
+WriteResult({ "nInserted" : 1 })
+> db.Students.insert({"Sname":"MAchindranath","ROll":2,"Class":"B"});
+WriteResult({ "nInserted" : 1 })
+>  db.user.find({$or:[{ROLL:2},{Sname:"Gaurav"}]});
+> db.user.find({$or:[{ROLL:"2"},{Sname:"Gaurav"}]});
+> db.Students.find({$or:[{ROLL:2},{Sname:"Gaurav"}]});
+{ "_id" : ObjectId("6366a18d447243ad24d43d15"), "Sname" : "Gaurav", "ROll" : 1, "Class" : "B" }
+> db.Students.find({$or:[{ROll:2},{Sname:"Gaurav"}]});
+{ "_id" : ObjectId("6366a18d447243ad24d43d15"), "Sname" : "Gaurav", "ROll" : 1, "Class" : "B" }
+{ "_id" : ObjectId("6366a1c1447243ad24d43d17"), "Sname" : "MAchindranath", "ROll" : 2, "Class" : "B" }
+> 

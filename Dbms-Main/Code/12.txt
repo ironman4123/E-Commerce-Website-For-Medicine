@@ -1,0 +1,72 @@
+*********************************
+                                                                  Practical No: 12
+
+Database Connectivity: Write a program to implement Mongo DB database connectivity with any front end language to implement Database navigation operations(add, delete, edit etc.)
+
+import java.net.UnknownHostException;
+import com.mongodb.*;
+
+public class test1 {
+      public static void main(String[] args) {
+ 
+    try {
+ 
+	/**** Connect to MongoDB ****/
+	MongoClient mongo = new MongoClient("localhost", 27017);
+ 
+	/**** Get database ****/
+	DB db = mongo.getDB("demo");
+ 
+	/**** Get collection / table from 'demo' ****/
+	DBCollection table = db.getCollection("t5batch");
+ 
+	/**** Insert ****/
+	BasicDBObject doc = new BasicDBObject();
+	doc.put("NAME", "Rahul");
+	doc.put("AGE", 30);
+	table.insert(doc);
+	BasicDBObject doc1 = new BasicDBObject();
+	doc1.put("NAME", "Arya");
+	doc1.put("AGE", 2);
+	table.insert(doc1);
+	
+	/**** Display ****/
+	System.out.println(doc);
+	System.out.println(doc1);
+ 
+	/**** Update ****/
+	BasicDBObject newDocument = new BasicDBObject();
+	newDocument.append("$set", new BasicDBObject().append("AGE", 31));
+				
+	BasicDBObject searchQuery = new BasicDBObject().append("NAME", "Rahul");
+
+	table.update(searchQuery, newDocument);
+	
+	/**** Remove****/
+	BasicDBObject document = new BasicDBObject();
+	document.put("AGE", 2);
+	table.remove(document);
+	
+/*table.remove(doc1);*/
+	
+   
+	/**** Done ****/
+	System.out.println("Done");
+ 
+    } catch (UnknownHostException e) {
+	e.printStackTrace();
+    } catch (MongoException e) {
+	e.printStackTrace();
+    }
+ 
+  }
+}
+
+
+/* output:-
+
+{ "NAME" : "Rahul" , "AGE" : 30 , "_id" : { "$oid" : "636c87e7f14ca3db1ebdcc71"}}
+{ "NAME" : "Arya" , "AGE" : 2 , "_id" : { "$oid" : "636c87e7f14ca3db1ebdcc72"}}
+Done
+
+*/

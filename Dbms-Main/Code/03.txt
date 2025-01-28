@@ -1,0 +1,127 @@
+
+*********************************
+Enter password: ***********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 13
+Server version: 8.0.30 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database practical3;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use practical3;
+Database changed
+mysql> create table officer(officer_id int, officer_name varchar(34),city varchar(20));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create table salary(officer_id int,salary int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into  officer(1,'ABC',Sinnar);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,'ABC',Sinnar)' at line 1
+mysql> insert into  officer(1,'ABC','Sinnar');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,'ABC','Sinnar')' at line 1
+mysql> insert into officer(1,'ABC','Sinnar');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,'ABC','Sinnar')' at line 1
+mysql> insert into officer values(1,'ABC','Sinnar');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into officer values(2,'XYZ','Nashik');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into officer values(3,'PQR','Sangmner');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into salary values(1,20000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into salary values(2,30000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into salary values(4,55000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from officer;
++------------+--------------+----------+
+| officer_id | officer_name | city     |
++------------+--------------+----------+
+|          1 | ABC          | Sinnar   |
+|          2 | XYZ          | Nashik   |
+|          3 | PQR          | Sangmner |
++------------+--------------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from salary;
++------------+--------+
+| officer_id | salary |
++------------+--------+
+|          1 |  20000 |
+|          2 |  30000 |
+|          4 |  55000 |
++------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select officer.officer_name,officer.city
+    -> from officer
+    -> inner join salary
+    -> on officer.officer_id=salary.officer_id;
++--------------+--------+
+| officer_name | city   |
++--------------+--------+
+| ABC          | Sinnar |
+| XYZ          | Nashik |
++--------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select officer.officer_name,officer.city,salary.salart
+    -> from officer
+    -> inner join salary
+    -> select officer.officer_name,officer.city,salary.salart
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select officer.officer_name,officer.city,salary.salart' at line 4
+mysql> select officer.officer_name,officer.city,salary.salary
+    -> from officer
+    -> inner join salary
+    -> on officer.officer_id=salary.officer_id;
++--------------+--------+--------+
+| officer_name | city   | salary |
++--------------+--------+--------+
+| ABC          | Sinnar |  20000 |
+| XYZ          | Nashik |  30000 |
++--------------+--------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select officer.officer_name,officer.city,salary.salary
+    -> from officer
+    -> left join salary
+    -> on officer.officer_id=salary.officer_id;
++--------------+----------+--------+
+| officer_name | city     | salary |
++--------------+----------+--------+
+| ABC          | Sinnar   |  20000 |
+| XYZ          | Nashik   |  30000 |
+| PQR          | Sangmner |   NULL |
++--------------+----------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select officer.officer_name,officer.city,salary.salary
+    -> from officer
+    -> right join salary
+    -> on officer.officer_id=salary.officer_id;
++--------------+--------+--------+
+| officer_name | city   | salary |
++--------------+--------+--------+
+| ABC          | Sinnar |  20000 |
+| XYZ          | Nashik |  30000 |
+| NULL         | NULL   |  55000 |
++--------------+--------+--------+
+3 rows in set (0.00 sec)
+
+mysql>
